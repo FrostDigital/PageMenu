@@ -7,6 +7,6 @@ Pod::Spec.new do |s|
   s.author       = { "uacaps" => "nfahl@cs.ua.edu" }
   s.source       = { :git => "https://github.com/uacaps/PageMenu.git", :tag => '1.2.9' }
   s.platform     = :ios, '8.0'
-  s.source_files = 'Classes/*'
+  s.source_files = 'Obj-C Classes/*'
   s.requires_arc = true
 end
