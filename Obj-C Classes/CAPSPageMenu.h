@@ -23,7 +23,7 @@
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIView *menuItemSeparator;
 
-- (void)setUpMenuItemView:(CGFloat)menuItemWidth menuScrollViewHeight:(CGFloat)menuScrollViewHeight indicatorHeight:(CGFloat)indicatorHeight separatorPercentageHeight:(CGFloat)separatorPercentageHeight separatorWidth:(CGFloat)separatorWidth separatorRoundEdges:(BOOL)separatorRoundEdges menuItemSeparatorColor:(UIColor *)menuItemSeparatorColor;
+- (void)setUpMenuItemView:(CGFloat)menuItemWidth menuScrollViewHeight:(CGFloat)menuScrollViewHeight indicatorHeight:(CGFloat)indicatorHeight separatorPercentageHeight:(CGFloat)separatorPercentageHeight separatorWidth:(CGFloat)separatorWidth separatorRoundEdges:(BOOL)separatorRoundEdges menuItemSeparatorColor:(UIColor *)menuItemSeparatorColor menuItemSeparatorImage:(UIImage *) menuItemSeparatorImage;
 
 - (void)setTitleText:(NSString *)text;
 
@@ -67,6 +67,8 @@
 @property (nonatomic) BOOL enableHorizontalBounce;
 @property (nonatomic) BOOL hideTopMenuBar;
 
+@property (nonatomic) UIImage *separatorImage;
+
 @property (nonatomic, weak) id <CAPSPageMenuDelegate> delegate;
 
 - (void)addPageAtIndex:(NSInteger)index;
@@ -96,5 +98,6 @@ extern NSString * const CAPSPageMenuOptionMenuItemWidthBasedOnTitleTextWidth;
 extern NSString * const CAPSPageMenuOptionScrollAnimationDurationOnMenuItemTap;
 extern NSString * const CAPSPageMenuOptionCenterMenuItems;
 extern NSString * const CAPSPageMenuOptionHideTopMenuBar;
+extern NSString * const CAPSPageMenuOptionSeparatorImage;
 
 @end

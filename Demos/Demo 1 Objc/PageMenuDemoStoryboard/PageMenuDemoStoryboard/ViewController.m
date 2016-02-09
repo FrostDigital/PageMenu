@@ -40,7 +40,7 @@
     controller3.title = @"MUSIC";
     TestViewController *controller4 = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
     controller4.title = @"FAVORITES";
-
+    
     NSArray *controllerArray = @[controller1, controller2, controller3, controller4];
     
     NSDictionary *parameters = @{
@@ -53,10 +53,10 @@
                                  CAPSPageMenuOptionMenuItemWidth: @(90.0),
                                  CAPSPageMenuOptionCenterMenuItems: @(YES),
                                  CAPSPageMenuOptionSelectedMenuItemLabelColor:Color_DarkGreen,
-                                 CAPSPageMenuOptionUnselectedMenuItemLabelColor:Color_MediumGreenLighter
+                                 CAPSPageMenuOptionUnselectedMenuItemLabelColor:Color_MediumGreenLighter, CAPSPageMenuOptionSeparatorImage:[UIImage imageNamed:@"Separator_arrow"], CAPSPageMenuOptionMenuItemSeparatorColor: [UIColor clearColor]
                                  };
-
-
+    
+    
     _pageMenu = [[CAPSPageMenu alloc] initWithViewControllers:controllerArray frame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) options:parameters];
     [self.view addSubview:_pageMenu.view];
 }

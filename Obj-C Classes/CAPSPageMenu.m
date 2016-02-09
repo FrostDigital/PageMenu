@@ -14,17 +14,17 @@
 
 @implementation MenuItemView
 
-- (void)setUpMenuItemView:(CGFloat)menuItemWidth menuScrollViewHeight:(CGFloat)menuScrollViewHeight indicatorHeight:(CGFloat)indicatorHeight separatorPercentageHeight:(CGFloat)separatorPercentageHeight separatorWidth:(CGFloat)separatorWidth separatorRoundEdges:(BOOL)separatorRoundEdges menuItemSeparatorColor:(UIColor *)menuItemSeparatorColor
+- (void)setUpMenuItemView:(CGFloat)menuItemWidth menuScrollViewHeight:(CGFloat)menuScrollViewHeight indicatorHeight:(CGFloat)indicatorHeight separatorPercentageHeight:(CGFloat)separatorPercentageHeight separatorWidth:(CGFloat)separatorWidth separatorRoundEdges:(BOOL)separatorRoundEdges menuItemSeparatorColor:(UIColor *)menuItemSeparatorColor menuItemSeparatorImage:(UIImage *) menuItemSeparatorImage
 {
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, menuItemWidth-20, menuScrollViewHeight - indicatorHeight)];
     _menuItemSeparator = [[UIView alloc] initWithFrame:CGRectMake(menuItemWidth - (separatorWidth / 2), 0, separatorWidth, menuScrollViewHeight)];
-    [_menuItemSeparator addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Separator_arrow"]]];
+    [_menuItemSeparator addSubview:[[UIImageView alloc] initWithImage:menuItemSeparatorImage]];
     
     if (separatorRoundEdges) {
         _menuItemSeparator.layer.cornerRadius = _menuItemSeparator.frame.size.width / 2;
     }
     
-    _menuItemSeparator.backgroundColor = [UIColor clearColor];//Color_MediumGreenLighter;
+    _menuItemSeparator.backgroundColor = menuItemSeparatorColor;
 
     
     // Vet ej varför det är såhär..
@@ -105,6 +105,7 @@ NSString * const CAPSPageMenuOptionMenuItemWidthBasedOnTitleTextWidth   = @"menu
 NSString * const CAPSPageMenuOptionScrollAnimationDurationOnMenuItemTap = @"scrollAnimationDurationOnMenuItemTap";
 NSString * const CAPSPageMenuOptionCenterMenuItems                      = @"centerMenuItems";
 NSString * const CAPSPageMenuOptionHideTopMenuBar                       = @"hideTopMenuBar";
+NSString * const CAPSPageMenuOptionSeparatorImage                       = @"separatorImage";
 
 - (instancetype)initWithViewControllers:(NSArray *)viewControllers frame:(CGRect)frame options:(NSDictionary *)options
 {
@@ -163,6 +164,8 @@ NSString * const CAPSPageMenuOptionHideTopMenuBar                       = @"hide
                 _centerMenuItems = [options[key] boolValue];
             } else if ([key isEqualToString:CAPSPageMenuOptionHideTopMenuBar]) {
                 _hideTopMenuBar = [options[key] boolValue];
+            } else if ([key isEqualToString:CAPSPageMenuOptionSeparatorImage]) {
+                _separatorImage = options[key];
             }
         }
         
@@ -368,7 +371,7 @@ NSString * const CAPSPageMenuOptionHideTopMenuBar                       = @"hide
         
         MenuItemView *menuItemView = [[MenuItemView alloc] initWithFrame:menuItemFrame];
         if (_useMenuLikeSegmentedControl) {
-            [menuItemView setUpMenuItemView:(CGFloat)self.view.frame.size.width / (CGFloat)_controllerArray.count menuScrollViewHeight:_menuHeight indicatorHeight:_selectionIndicatorHeight separatorPercentageHeight:_menuItemSeparatorPercentageHeight separatorWidth:_menuItemSeparatorWidth separatorRoundEdges:_menuItemSeparatorRoundEdges menuItemSeparatorColor:_menuItemSeparatorColor];
+            [menuItemView setUpMenuItemView:(CGFloat)self.view.frame.size.width / (CGFloat)_controllerArray.count menuScrollViewHeight:_menuHeight indicatorHeight:_selectionIndicatorHeight separatorPercentageHeight:_menuItemSeparatorPercentageHeight separatorWidth:_menuItemSeparatorWidth separatorRoundEdges:_menuItemSeparatorRoundEdges menuItemSeparatorColor:_menuItemSeparatorColor menuItemSeparatorImage:_separatorImage];
             
         } else {
             [menuItemView setUpMenuItemView:_menuItemWidth
@@ -377,7 +380,8 @@ NSString * const CAPSPageMenuOptionHideTopMenuBar                       = @"hide
                   separatorPercentageHeight:_menuItemSeparatorPercentageHeight
                              separatorWidth:_menuItemSeparatorWidth
                         separatorRoundEdges:_menuItemSeparatorRoundEdges
-                     menuItemSeparatorColor:_menuItemSeparatorColor];
+                     menuItemSeparatorColor:_menuItemSeparatorColor
+                     menuItemSeparatorImage:_separatorImage];
         }
         
         // Configure menu item label font if font is set by user
