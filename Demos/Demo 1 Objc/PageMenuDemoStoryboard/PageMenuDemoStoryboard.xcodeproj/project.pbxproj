@@ -122,7 +122,6 @@
 		9347A8AE1B218AAB00C9766A /* TestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTableViewController.m; sourceTree = "<group>"; };
 		9347A8B01B218AC300C9766A /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		9347A8B11B218AC300C9766A /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
-		9A58A9401C69FEFA009330B7 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +167,6 @@
 				9347A8351B21869700C9766A /* AppDelegate.m */,
 				9347A8371B21869700C9766A /* ViewController.h */,
 				9347A8381B21869700C9766A /* ViewController.m */,
-				9A58A9401C69FEFA009330B7 /* Constants.h */,
 				9347A83A1B21869700C9766A /* Main.storyboard */,
 				9347A8591B2186FA00C9766A /* CAPSPageMenu */,
 				9347A8A21B218A0700C9766A /* Cells */,

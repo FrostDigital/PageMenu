@@ -7,7 +7,6 @@
 //
 
 #import "CAPSPageMenu.h"
-#import "Constants.h"
 
 @interface MenuItemView ()
 

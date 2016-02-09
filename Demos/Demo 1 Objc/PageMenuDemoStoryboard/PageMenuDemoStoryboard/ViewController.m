@@ -7,7 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "Constants.h"
+
+#define Color_LightGreen [UIColor colorWithRed:195/255.0 green:232/255.0 blue:147/255.0 alpha:1.0]
+#define Color_DarkGreen [UIColor colorWithRed:64/255.0 green:96/255.0 blue:22/255.0 alpha:1.0]
+#define Color_MediumGreenLighter [UIColor colorWithRed:142/255.0 green:183/255.0 blue:88/255.0 alpha:1.0]
 
 @interface ViewController ()
 @property (nonatomic) CAPSPageMenu *pageMenu;
