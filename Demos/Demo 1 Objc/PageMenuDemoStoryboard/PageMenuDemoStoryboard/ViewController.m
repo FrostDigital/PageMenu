@@ -30,7 +30,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"->" style:UIBarButtonItemStyleDone target:self action:@selector(didTapGoToRight)];
     
     TestTableViewController *controller1 = [[TestTableViewController alloc]initWithNibName:@"TestTableViewController" bundle:nil];
-    controller1.title = @"FRIENDS";
+    controller1.title = @"Typ av anslutning";
     TestCollectionViewController *controller2 = [[TestCollectionViewController alloc]initWithNibName:@"TestCollectionViewController" bundle:nil];
     controller2.title = @"MOOD";
     TestViewController *controller3 = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
@@ -45,8 +45,8 @@
                                  CAPSPageMenuOptionViewBackgroundColor:Color_LightGreen,
                                  CAPSPageMenuOptionSelectionIndicatorColor:Color_DarkGreen,
                                  CAPSPageMenuOptionBottomMenuHairlineColor:Color_MediumGreenLighter,
-                                 CAPSPageMenuOptionMenuItemFont: [UIFont fontWithName:@"HelveticaNeue-Medium" size:12],
-                                 CAPSPageMenuOptionMenuHeight: @(40.0),
+                                 CAPSPageMenuOptionMenuItemFont: [UIFont fontWithName:@"HelveticaNeue-Medium" size:11],
+                                 CAPSPageMenuOptionMenuHeight: @(42.0),
                                  CAPSPageMenuOptionMenuItemWidth: @(90.0),
                                  CAPSPageMenuOptionCenterMenuItems: @(YES),
                                  CAPSPageMenuOptionSelectedMenuItemLabelColor:Color_DarkGreen,

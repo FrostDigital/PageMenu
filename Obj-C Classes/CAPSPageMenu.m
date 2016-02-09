@@ -17,11 +17,9 @@
 
 - (void)setUpMenuItemView:(CGFloat)menuItemWidth menuScrollViewHeight:(CGFloat)menuScrollViewHeight indicatorHeight:(CGFloat)indicatorHeight separatorPercentageHeight:(CGFloat)separatorPercentageHeight separatorWidth:(CGFloat)separatorWidth separatorRoundEdges:(BOOL)separatorRoundEdges menuItemSeparatorColor:(UIColor *)menuItemSeparatorColor
 {
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, menuItemWidth, menuScrollViewHeight - indicatorHeight)];
-
-//    _menuItemSeparator = [[UIView alloc] initWithFrame:CGRectMake(menuItemWidth - (separatorWidth / 2), floor(menuScrollViewHeight * ((1.0 - separatorPercentageHeight) / 2.0)), separatorWidth, floor(menuScrollViewHeight * separatorPercentageHeight))];
-    
-    _menuItemSeparator = [[UIView alloc] initWithFrame:CGRectMake(menuItemWidth - (separatorWidth / 2), 0, separatorWidth *2, menuScrollViewHeight)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, menuItemWidth-20, menuScrollViewHeight - indicatorHeight)];
+    _menuItemSeparator = [[UIView alloc] initWithFrame:CGRectMake(menuItemWidth - (separatorWidth / 2), 0, separatorWidth, menuScrollViewHeight)];
+//    [_menuItemSeparator addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Separator_arrow"]]];
     
     if (separatorRoundEdges) {
         _menuItemSeparator.layer.cornerRadius = _menuItemSeparator.frame.size.width / 2;
@@ -42,6 +40,13 @@
         _titleLabel.numberOfLines = 0;
         _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
+        
+        NSMutableParagraphStyle *style  = [[NSMutableParagraphStyle alloc] init];
+        style.minimumLineHeight = 12.f;
+        style.maximumLineHeight = 12.f;
+        NSDictionary *attributtes = @{NSParagraphStyleAttributeName : style,};
+        _titleLabel.attributedText = [[NSAttributedString alloc] initWithString:text
+                                                                 attributes:attributtes];
     }
 }
 
@@ -183,7 +188,7 @@ NSString * const CAPSPageMenuOptionHideTopMenuBar                       = @"hide
     _mutableMenuItems       = [NSMutableArray array];
     _mutableMenuItemWidths  = [NSMutableArray array];
     
-    _menuHeight                           = 42.0;
+    _menuHeight                           = 44.0;
     _menuMargin                           = 15.0;
     _menuItemWidth                        = 111.0;
     _selectionIndicatorHeight             = 0.0;
@@ -206,7 +211,7 @@ NSString * const CAPSPageMenuOptionHideTopMenuBar                       = @"hide
     
     _menuItemFont = [UIFont systemFontOfSize:15.0];
     _menuItemSeparatorPercentageHeight = 0.2;
-    _menuItemSeparatorWidth            = 0.5;
+    _menuItemSeparatorWidth            = 1;
     _menuItemSeparatorRoundEdges       = NO;
     
     _addBottomMenuHairline              = YES;
