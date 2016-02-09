@@ -18,12 +18,7 @@
 - (void)setUpMenuItemView:(CGFloat)menuItemWidth menuScrollViewHeight:(CGFloat)menuScrollViewHeight indicatorHeight:(CGFloat)indicatorHeight separatorPercentageHeight:(CGFloat)separatorPercentageHeight separatorWidth:(CGFloat)separatorWidth separatorRoundEdges:(BOOL)separatorRoundEdges menuItemSeparatorColor:(UIColor *)menuItemSeparatorColor
 {
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, menuItemWidth, menuScrollViewHeight - indicatorHeight)];
-    
-//    _titleLabel.backgroundColor = [UIColor redColor];
-    
-    
-    // Här skapas _.menuItemSeparator - istället för man kunna skicka in en färdig
-    // UIView där separatorn är satt
+
 //    _menuItemSeparator = [[UIView alloc] initWithFrame:CGRectMake(menuItemWidth - (separatorWidth / 2), floor(menuScrollViewHeight * ((1.0 - separatorPercentageHeight) / 2.0)), separatorWidth, floor(menuScrollViewHeight * separatorPercentageHeight))];
     
     _menuItemSeparator = [[UIView alloc] initWithFrame:CGRectMake(menuItemWidth - (separatorWidth / 2), 0, separatorWidth *2, menuScrollViewHeight)];
@@ -45,7 +40,7 @@
     if (_titleLabel) {
         _titleLabel.text = text;
         _titleLabel.numberOfLines = 0;
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
     }
 }
@@ -188,10 +183,10 @@ NSString * const CAPSPageMenuOptionHideTopMenuBar                       = @"hide
     _mutableMenuItems       = [NSMutableArray array];
     _mutableMenuItemWidths  = [NSMutableArray array];
     
-    _menuHeight                           = 34.0;
+    _menuHeight                           = 42.0;
     _menuMargin                           = 15.0;
     _menuItemWidth                        = 111.0;
-    _selectionIndicatorHeight             = 3.0;
+    _selectionIndicatorHeight             = 0.0;
     _totalMenuItemWidthIfDifferentWidths  = 0.0;
     _scrollAnimationDurationOnMenuItemTap = 500;
     _startingMenuMargin                   = 0.0;
