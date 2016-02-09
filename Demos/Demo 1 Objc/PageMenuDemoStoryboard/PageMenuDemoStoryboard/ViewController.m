@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "Constants.h"
 
 @interface ViewController ()
 @property (nonatomic) CAPSPageMenu *pageMenu;
@@ -39,16 +39,20 @@
     controller4.title = @"FAVORITES";
 
     NSArray *controllerArray = @[controller1, controller2, controller3, controller4];
+    
     NSDictionary *parameters = @{
-                                 CAPSPageMenuOptionScrollMenuBackgroundColor: [UIColor colorWithRed:30.0/255.0 green:30.0/255.0 blue:30.0/255.0 alpha:1.0],
-                                 CAPSPageMenuOptionViewBackgroundColor: [UIColor colorWithRed:20.0/255.0 green:20.0/255.0 blue:20.0/255.0 alpha:1.0],
-                                 CAPSPageMenuOptionSelectionIndicatorColor: [UIColor orangeColor],
-                                 CAPSPageMenuOptionBottomMenuHairlineColor: [UIColor colorWithRed:70.0/255.0 green:70.0/255.0 blue:70.0/255.0 alpha:1.0],
-                                 CAPSPageMenuOptionMenuItemFont: [UIFont fontWithName:@"HelveticaNeue" size:13.0],
+                                 CAPSPageMenuOptionScrollMenuBackgroundColor:Color_LightGreen,
+                                 CAPSPageMenuOptionViewBackgroundColor:Color_LightGreen,
+                                 CAPSPageMenuOptionSelectionIndicatorColor:Color_DarkGreen,
+                                 CAPSPageMenuOptionBottomMenuHairlineColor:Color_MediumGreenLighter,
+                                 CAPSPageMenuOptionMenuItemFont: [UIFont fontWithName:@"HelveticaNeue-Medium" size:12],
                                  CAPSPageMenuOptionMenuHeight: @(40.0),
                                  CAPSPageMenuOptionMenuItemWidth: @(90.0),
-                                 CAPSPageMenuOptionCenterMenuItems: @(YES)
+                                 CAPSPageMenuOptionCenterMenuItems: @(YES),
+                                 CAPSPageMenuOptionSelectedMenuItemLabelColor:Color_DarkGreen,
+                                 CAPSPageMenuOptionUnselectedMenuItemLabelColor:Color_MediumGreenLighter
                                  };
+
 
     _pageMenu = [[CAPSPageMenu alloc] initWithViewControllers:controllerArray frame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) options:parameters];
     [self.view addSubview:_pageMenu.view];
