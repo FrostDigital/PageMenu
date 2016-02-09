@@ -23,7 +23,7 @@
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIView *menuItemSeparator;
 
-- (void)setUpMenuItemView:(CGFloat)menuItemWidth menuScrollViewHeight:(CGFloat)menuScrollViewHeight indicatorHeight:(CGFloat)indicatorHeight separatorPercentageHeight:(CGFloat)separatorPercentageHeight separatorWidth:(CGFloat)separatorWidth separatorRoundEdges:(BOOL)separatorRoundEdges menuItemSeparatorColor:(UIColor *)menuItemSeparatorColor menuItemSeparatorImage:(UIImage *) menuItemSeparatorImage;
+- (void)setUpMenuItemView:(CGFloat)menuItemWidth menuScrollViewHeight:(CGFloat)menuScrollViewHeight indicatorHeight:(CGFloat)indicatorHeight separatorPercentageHeight:(CGFloat)separatorPercentageHeight separatorWidth:(CGFloat)separatorWidth separatorRoundEdges:(BOOL)separatorRoundEdges menuItemSeparatorColor:(UIColor *)menuItemSeparatorColor menuItemSeparatorImage:(UIImage *) menuItemSeparatorImage isLastItem:(BOOL) isLastItem;
 
 - (void)setTitleText:(NSString *)text;
 
@@ -66,6 +66,7 @@
 @property (nonatomic) BOOL centerMenuItems;
 @property (nonatomic) BOOL enableHorizontalBounce;
 @property (nonatomic) BOOL hideTopMenuBar;
+@property (nonatomic) BOOL hideLastSeparator;
 
 @property (nonatomic) UIImage *separatorImage;
 
@@ -99,5 +100,6 @@ extern NSString * const CAPSPageMenuOptionScrollAnimationDurationOnMenuItemTap;
 extern NSString * const CAPSPageMenuOptionCenterMenuItems;
 extern NSString * const CAPSPageMenuOptionHideTopMenuBar;
 extern NSString * const CAPSPageMenuOptionSeparatorImage;
+extern NSString * const CAPSPageMenuOptionHideLastSeparator;
 
 @end

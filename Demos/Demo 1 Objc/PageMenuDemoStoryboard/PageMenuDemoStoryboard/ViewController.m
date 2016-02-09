@@ -53,7 +53,10 @@
                                  CAPSPageMenuOptionMenuItemWidth: @(90.0),
                                  CAPSPageMenuOptionCenterMenuItems: @(YES),
                                  CAPSPageMenuOptionSelectedMenuItemLabelColor:Color_DarkGreen,
-                                 CAPSPageMenuOptionUnselectedMenuItemLabelColor:Color_MediumGreenLighter, CAPSPageMenuOptionSeparatorImage:[UIImage imageNamed:@"Separator_arrow"], CAPSPageMenuOptionMenuItemSeparatorColor: [UIColor clearColor]
+                                 CAPSPageMenuOptionUnselectedMenuItemLabelColor:Color_MediumGreenLighter,
+                                 CAPSPageMenuOptionSeparatorImage:[UIImage imageNamed:@"Separator_arrow"],
+                                 CAPSPageMenuOptionMenuItemSeparatorColor: [UIColor clearColor],
+                                 CAPSPageMenuOptionHideLastSeparator:@(YES)
                                  };
     
     
