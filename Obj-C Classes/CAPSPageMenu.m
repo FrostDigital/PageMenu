@@ -19,13 +19,13 @@
 {
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, menuItemWidth-20, menuScrollViewHeight - indicatorHeight)];
     _menuItemSeparator = [[UIView alloc] initWithFrame:CGRectMake(menuItemWidth - (separatorWidth / 2), 0, separatorWidth, menuScrollViewHeight)];
-//    [_menuItemSeparator addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Separator_arrow"]]];
+    [_menuItemSeparator addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Separator_arrow"]]];
     
     if (separatorRoundEdges) {
         _menuItemSeparator.layer.cornerRadius = _menuItemSeparator.frame.size.width / 2;
     }
     
-    _menuItemSeparator.backgroundColor = Color_MediumGreenLighter;
+    _menuItemSeparator.backgroundColor = [UIColor clearColor];//Color_MediumGreenLighter;
 
     
     // Vet ej varför det är såhär..
@@ -211,7 +211,7 @@ NSString * const CAPSPageMenuOptionHideTopMenuBar                       = @"hide
     
     _menuItemFont = [UIFont systemFontOfSize:15.0];
     _menuItemSeparatorPercentageHeight = 0.2;
-    _menuItemSeparatorWidth            = 1;
+    _menuItemSeparatorWidth            = 50.0;
     _menuItemSeparatorRoundEdges       = NO;
     
     _addBottomMenuHairline              = YES;
