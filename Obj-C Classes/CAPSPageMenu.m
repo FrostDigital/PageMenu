@@ -8,6 +8,8 @@
 
 #import "CAPSPageMenu.h"
 
+#define kBadgeSize 14
+
 @interface MenuItemView ()
 
 @end
@@ -24,25 +26,32 @@ separatorPercentageHeight:(CGFloat)separatorPercentageHeight
    menuItemSeparatorImage:(UIImage *) menuItemSeparatorImage
                isLastItem:(BOOL)isLastItem
 {
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, menuItemWidth-20, menuScrollViewHeight - indicatorHeight)];
-    
+    // Add separator
     if (!isLastItem)
     {
         _menuItemSeparator = [[UIView alloc] initWithFrame:CGRectMake(menuItemWidth - (separatorWidth / 2), 0, separatorWidth, menuScrollViewHeight)];
         [_menuItemSeparator addSubview:[[UIImageView alloc] initWithImage:menuItemSeparatorImage]];
         
-        if (separatorRoundEdges) {
+        if (separatorRoundEdges)
+        {
             _menuItemSeparator.layer.cornerRadius = _menuItemSeparator.frame.size.width / 2;
         }
         
         _menuItemSeparator.backgroundColor = menuItemSeparatorColor;
-        
         _menuItemSeparator.hidden = NO;
         [self addSubview:_menuItemSeparator];
     }
-
+    
+    // Add text label
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, menuItemWidth-20, menuScrollViewHeight - indicatorHeight)];
     [self addSubview:_titleLabel];
+    
+    // Add badge view
+    _badgeView = [[UIView alloc] initWithFrame:CGRectMake(_titleLabel.frame.size.width - (kBadgeSize + 5), 5, kBadgeSize, kBadgeSize)];
+    _badgeView.hidden = YES;
+    [self addSubview:_badgeView];
 }
+
 - (void)setTitleText:(NSString *)text
 {
     if (_titleLabel) {
@@ -56,9 +65,46 @@ separatorPercentageHeight:(CGFloat)separatorPercentageHeight
         style.maximumLineHeight = 12.f;
         NSDictionary *attributtes = @{NSParagraphStyleAttributeName : style,};
         _titleLabel.attributedText = [[NSAttributedString alloc] initWithString:text
-                                                                 attributes:attributtes];
+                                                                     attributes:attributtes];
     }
 }
+
+- (void)showBadgeWithTitle:(NSString *) title backgroundColor:(UIColor *) backgroundColor
+{
+    if (_titleLabel)
+    {
+        [_titleLabel sizeToFit];
+        _titleLabel.frame = CGRectMake(0, 0, _titleLabel.frame.size.width, self.frame.size.height);
+    }
+    
+    if (_badgeView)
+    {
+        UIColor *textAndBorderColor = [UIColor whiteColor];
+        
+        _badgeView.frame = CGRectMake(_titleLabel.frame.size.width, 5, kBadgeSize, kBadgeSize);
+        _badgeView.backgroundColor = backgroundColor;
+        _badgeView.layer.borderColor = textAndBorderColor.CGColor;
+        _badgeView.layer.borderWidth = kBadgeSize / 10.0;
+        _badgeView.layer.cornerRadius = kBadgeSize / 2.0;
+        _badgeView.layer.masksToBounds = YES;
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _badgeView.frame.size.width, _badgeView.frame.size.height)];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:kBadgeSize - 5];
+        label.textColor = textAndBorderColor;
+        label.text = title;
+        
+        [_badgeView addSubview:label];
+        
+        _badgeView.hidden = NO;
+    }
+}
+
+- (void) hideBadge
+{
+    _badgeView.hidden = YES;
+}
+
 
 @end
 
@@ -500,9 +546,9 @@ NSString * const CAPSPageMenuOptionHideLastSeparator                    = @"hide
                                     if (index >= 0 && index < _controllerArray.count ){
                                         // Check dictionary if page was already added
                                         if (![_pagesAddedSet containsObject:@(index)]) {
-
+                                            
                                             [self addPageAtIndex:index];
-
+                                            
                                             [_pagesAddedSet addObject:@(index)];
                                         }
                                     }
@@ -517,10 +563,10 @@ NSString * const CAPSPageMenuOptionHideLastSeparator                    = @"hide
                                 if (_currentPageIndex != _controllerArray.count - 1 ){
                                     // Add page to the left of current page
                                     NSInteger index = _currentPageIndex - 1;
-
+                                    
                                     if (![_pagesAddedSet containsObject:@(index)] && index < _controllerArray.count && index >= 0) {
                                         [self addPageAtIndex:index];
-
+                                        
                                         [_pagesAddedSet addObject:@(index)];
                                     }
                                     
@@ -532,7 +578,7 @@ NSString * const CAPSPageMenuOptionHideLastSeparator                    = @"hide
                                     NSInteger index = _currentPageIndex + 1;
                                     
                                     if (![_pagesAddedSet containsObject:@(index)] && index < _controllerArray.count && index >= 0) {
-
+                                        
                                         [self addPageAtIndex:index];
                                         [_pagesAddedSet addObject:@(index)];
                                     }
@@ -590,9 +636,9 @@ NSString * const CAPSPageMenuOptionHideLastSeparator                    = @"hide
                             }
                             NSInteger indexRightTwo = page + 2;
                             if ([_pagesAddedSet containsObject:@(indexRightTwo)]) {
-
+                                
                                 [_pagesAddedSet removeObject:@(indexRightTwo)];
-
+                                
                                 [self removePageAtIndex:indexRightTwo];
                             }
                         }
@@ -660,7 +706,7 @@ NSString * const CAPSPageMenuOptionHideLastSeparator                    = @"hide
             [self removePageAtIndex:num.integerValue];
         }
     }
-
+    
     _startingPageForScroll = _currentPageIndex;
     _didTapMenuItemToScroll = NO;
     

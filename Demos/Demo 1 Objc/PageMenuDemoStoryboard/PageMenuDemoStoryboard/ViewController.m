@@ -35,11 +35,11 @@
     TestTableViewController *controller1 = [[TestTableViewController alloc]initWithNibName:@"TestTableViewController" bundle:nil];
     controller1.title = @"Typ av anslutning";
     TestCollectionViewController *controller2 = [[TestCollectionViewController alloc]initWithNibName:@"TestCollectionViewController" bundle:nil];
-    controller2.title = @"MOOD";
+    controller2.title = @"Arbete på servis";
     TestViewController *controller3 = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
-    controller3.title = @"MUSIC";
+    controller3.title = @"Beställare";
     TestViewController *controller4 = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
-    controller4.title = @"FAVORITES";
+    controller4.title = @"Skicka in ärende";
     
     NSArray *controllerArray = @[controller1, controller2, controller3, controller4];
     
@@ -61,6 +61,15 @@
     
     
     _pageMenu = [[CAPSPageMenu alloc] initWithViewControllers:controllerArray frame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) options:parameters];
+    
+    
+    MenuItemView *menuItemView1 = [[_pageMenu menuItems] objectAtIndex:1];
+    [menuItemView1 showBadgeWithTitle:@"0" backgroundColor:Color_DarkGreen];
+    
+    MenuItemView *menuItemView3 = [[_pageMenu menuItems] objectAtIndex:2];
+    [menuItemView3 showBadgeWithTitle:@"!" backgroundColor:[UIColor redColor]];
+    
+    
     [self.view addSubview:_pageMenu.view];
 }
 

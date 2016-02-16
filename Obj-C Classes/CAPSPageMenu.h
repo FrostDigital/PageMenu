@@ -22,10 +22,13 @@
 
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIView *menuItemSeparator;
+@property (nonatomic) UIView *badgeView;
 
 - (void)setUpMenuItemView:(CGFloat)menuItemWidth menuScrollViewHeight:(CGFloat)menuScrollViewHeight indicatorHeight:(CGFloat)indicatorHeight separatorPercentageHeight:(CGFloat)separatorPercentageHeight separatorWidth:(CGFloat)separatorWidth separatorRoundEdges:(BOOL)separatorRoundEdges menuItemSeparatorColor:(UIColor *)menuItemSeparatorColor menuItemSeparatorImage:(UIImage *) menuItemSeparatorImage isLastItem:(BOOL) isLastItem;
 
 - (void)setTitleText:(NSString *)text;
+- (void)showBadgeWithTitle:(NSString *) title backgroundColor:(UIColor *) backgroundColor;
+- (void)hideBadge;
 
 @end
 
