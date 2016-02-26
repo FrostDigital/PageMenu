@@ -12,6 +12,8 @@
 
 @interface MenuItemView ()
 
+@property (nonatomic) UILabel *badgeLabel;
+
 @end
 
 @implementation MenuItemView
@@ -48,7 +50,11 @@ separatorPercentageHeight:(CGFloat)separatorPercentageHeight
     
     // Add badge view
     _badgeView = [[UIView alloc] initWithFrame:CGRectMake(_titleLabel.frame.size.width - (kBadgeSize + 5), 5, kBadgeSize, kBadgeSize)];
+    _badgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _badgeView.frame.size.width, _badgeView.frame.size.height)];
+    
+    [_badgeView addSubview:_badgeLabel];
     _badgeView.hidden = YES;
+    
     [self addSubview:_badgeView];
 }
 
@@ -88,13 +94,10 @@ separatorPercentageHeight:(CGFloat)separatorPercentageHeight
         _badgeView.layer.cornerRadius = kBadgeSize / 2.0;
         _badgeView.layer.masksToBounds = YES;
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _badgeView.frame.size.width, _badgeView.frame.size.height)];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:kBadgeSize - 5];
-        label.textColor = textAndBorderColor;
-        label.text = title;
-        
-        [_badgeView addSubview:label];
+        _badgeLabel.textAlignment = NSTextAlignmentCenter;
+        _badgeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:kBadgeSize - 5];
+        _badgeLabel.textColor = textAndBorderColor;
+        _badgeLabel.text = title;
         
         _badgeView.hidden = NO;
     }
@@ -882,27 +885,27 @@ NSString * const CAPSPageMenuOptionHideLastSeparator                    = @"hide
 {
     // Configure controller scroll view content size
     _controllerScrollView.contentSize = CGSizeMake(self.view.frame.size.width * (CGFloat)_controllerArray.count, self.view.frame.size.height - _menuHeight);
-    
+
     BOOL oldCurrentOrientationIsPortrait = _currentOrientationIsPortrait;
-    
+
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     _currentOrientationIsPortrait = UIInterfaceOrientationIsPortrait(orientation);
-    
+
     if ((oldCurrentOrientationIsPortrait && UIInterfaceOrientationIsLandscape(orientation)) || (!oldCurrentOrientationIsPortrait && UIInterfaceOrientationIsPortrait(orientation))){
         _didLayoutSubviewsAfterRotation = YES;
-        
+
         //Resize menu items if using as segmented control
         if (_useMenuLikeSegmentedControl) {
             _menuScrollView.contentSize = CGSizeMake(self.view.frame.size.width, _menuHeight);
-            
+
             // Resize selectionIndicator bar
             CGFloat selectionIndicatorX = (CGFloat)_currentPageIndex * (self.view.frame.size.width / (CGFloat)_controllerArray.count);
             CGFloat selectionIndicatorWidth = self.view.frame.size.width / (CGFloat)_controllerArray.count;
             _selectionIndicatorView.frame =  CGRectMake(selectionIndicatorX, self.selectionIndicatorView.frame.origin.y, selectionIndicatorWidth, self.selectionIndicatorView.frame.size.height);
-            
+
             // Resize menu items
             NSInteger index = 0;
-            
+
             for (MenuItemView *item in _mutableMenuItems) {
                 item.frame = CGRectMake(self.view.frame.size.width / (CGFloat)_controllerArray.count * (CGFloat)index, 0.0, self.view.frame.size.width / (CGFloat)_controllerArray.count, _menuHeight);
                 if (item.titleLabel) {
@@ -911,49 +914,49 @@ NSString * const CAPSPageMenuOptionHideLastSeparator                    = @"hide
                 if (item.menuItemSeparator){
                     item.menuItemSeparator.frame = CGRectMake(item.frame.size.width - (_menuItemSeparatorWidth / 2), item.menuItemSeparator.frame.origin.y, item.menuItemSeparator.frame.size.width, item.menuItemSeparator.frame.size.height);
                 }
-                
+
                 index++;
             }
         } else if (_centerMenuItems) {
             _startingMenuMargin = ((self.view.frame.size.width - (((CGFloat)_controllerArray.count * _menuItemWidth) + ((CGFloat)(_controllerArray.count - 1) * _menuMargin))) / 2.0) -  _menuMargin;
-            
+
             if (_startingMenuMargin < 0.0) {
                 _startingMenuMargin = 0.0;
             }
-            
+
             CGFloat selectionIndicatorX = self.menuItemWidth * (CGFloat)_currentPageIndex + self.menuMargin * (CGFloat)(_currentPageIndex + 1) + self.startingMenuMargin;
             _selectionIndicatorView.frame =  CGRectMake(selectionIndicatorX, self.selectionIndicatorView.frame.origin.y, self.selectionIndicatorView.frame.size.width, self.selectionIndicatorView.frame.size.height);
-            
+
             // Recalculate frame for menu items if centered
             NSInteger index = 0;
-            
+
             for (MenuItemView *item in _mutableMenuItems) {
                 if (index == 0) {
                     item.frame = CGRectMake(_startingMenuMargin + _menuMargin, 0.0, _menuItemWidth, _menuHeight);
                 } else {
                     item.frame = CGRectMake(_menuItemWidth * (CGFloat)index + _menuMargin * (CGFloat)index + 1.0 + _startingMenuMargin, 0.0, _menuItemWidth, _menuHeight);
                 }
-                
+
                 index++;
             }
         }
-        
+
         for (UIView *view in _controllerScrollView.subviews) {
             view.frame = CGRectMake(self.view.frame.size.width * (CGFloat)(_currentPageIndex), _menuHeight, _controllerScrollView.frame.size.width, self.view.frame.size.height - _menuHeight);
         }
-        
+
         CGFloat xOffset = (CGFloat)(self.currentPageIndex) * _controllerScrollView.frame.size.width;
         [_controllerScrollView setContentOffset:CGPointMake(xOffset, _controllerScrollView.contentOffset.y)];
-        
+
         CGFloat ratio = (_menuScrollView.contentSize.width - self.view.frame.size.width) / (_controllerScrollView.contentSize.width - self.view.frame.size.width);
-        
+
         if (_menuScrollView.contentSize.width > self.view.frame.size.width) {
             CGPoint offset = _menuScrollView.contentOffset;
             offset.x = _controllerScrollView.contentOffset.x * ratio;
             [_menuScrollView setContentOffset:offset animated:NO];
         }
     }
-    
+
     // Hsoi 2015-02-05 - Running on iOS 7.1 complained: "'NSInternalInconsistencyException', reason: 'Auto Layout
     // still required after sending -viewDidLayoutSubviews to the view controller. ViewController's implementation
     // needs to send -layoutSubviews to the view to invoke auto layout.'"
@@ -1023,7 +1026,7 @@ NSString * const CAPSPageMenuOptionHideLastSeparator                    = @"hide
 }
 
 
-// MARK: Getter 
+// MARK: Getter
 - (NSArray *)menuItems
 {
     return _mutableMenuItems;
