@@ -864,6 +864,13 @@ NSString * const CAPSPageMenuOptionHideLastSeparator                    = @"hide
     [self addChildViewController:newVC];
     [_controllerScrollView addSubview:newVC.view];
     [newVC didMoveToParentViewController:self];
+    
+    if(index == 0)
+    {
+        // XXX: Hacky fix of issue where first vc's viewWillAppear is not called
+        // https://github.com/HighBay/PageMenu/issues/192
+        [newVC viewWillAppear:NO];
+    }
 }
 
 - (void)removePageAtIndex:(NSInteger)index
